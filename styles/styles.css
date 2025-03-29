@@ -1,0 +1,53 @@
+/* Custom styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Dark mode styles */
+.dark {
+  background-color: #11001c;
+  color: #e2e8f0;
+}
+
+/* Light mode styles */
+.light {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.light .bg-\[\#190028\] {
+  background-color: #e2e8f0;
+}
+
+.light .text-gray-200 {
+  color: #1e293b;
+}
+
+.light .text-gray-400 {
+  color: #64748b;
+}
+
+/* Smooth theme transition */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #190028;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a015c;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4f037d;
+}

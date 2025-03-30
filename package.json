@@ -1,12 +1,16 @@
 {
-  "homepage": "https://yourusername.github.io/repository-name",
+  "homepage": "https://yourusername.github.io/manikantay11/portfolio",
   "scripts": {
     "predeploy": "npm run build",
+    "build": "echo 'No build step required'",
     "start": "live-server",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d ."
   },
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "live-server": "^1.2.1"
+  },
+  "dependencies": {
+    "npx": "^10.2.2"
   }
 }

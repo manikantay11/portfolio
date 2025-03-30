@@ -142,38 +142,41 @@ if (document.getElementById('contact-form')) {
     e.preventDefault()
 
     // Get form values
-    const formData = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      subject: document.getElementById('subject').value,
-      message: document.getElementById('message').value,
-    }
+    const formData = new FormData(contactForm)
 
     // Simple validation
-    if (!formData.name || !formData.email || !formData.message) {
+    if (
+      !formData.get('name') ||
+      !formData.get('email') ||
+      !formData.get('message')
+    ) {
       alert('Please fill in all required fields.')
       return
     }
 
-    // Here you would typically send the data to a server
-    console.log('Form submitted:', formData)
-
-    // Show success message
+    // Show loading message
     const successMessage = document.createElement('div')
-    successMessage.className = 'bg-green-500 text-white p-4 rounded-lg mb-4'
-    successMessage.textContent =
-      'Thank you for your message! I will get back to you soon.'
+    successMessage.className = 'bg-blue-500 text-white p-4 rounded-lg mb-4'
+    successMessage.textContent = 'Sending message... Please wait.'
+    contactForm.parentElement.insertBefore(successMessage, contactForm)
 
-    const formContainer = contactForm.parentElement
-    formContainer.insertBefore(successMessage, contactForm)
-
-    // Reset the form
-    contactForm.reset()
-
-    // Remove success message after 5 seconds
-    setTimeout(() => {
-      successMessage.remove()
-    }, 5000)
+    // Send form data to Formspree
+    fetch('https://formspree.io/f/mjkyeavk', {
+      method: 'POST',
+      body: formData,
+      headers: { Accept: 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        successMessage.textContent = 'Thank you! Your message has been sent.'
+        contactForm.reset()
+        setTimeout(() => {
+          successMessage.remove()
+        }, 5000)
+      })
+      .catch((error) => {
+        successMessage.textContent = 'Oops! Something went wrong.'
+      })
   })
 }
 
